@@ -50,40 +50,52 @@
   /* HEADER */
   header{
     position:sticky;top:0;z-index:60;
-    background:rgba(255,255,255,.7);
+    background:linear-gradient(120deg, #EEF4FF 0%, #F3E8FF 30%, #E0F7FA 60%, #FDF2F8 100%);
+    background-size:200% 200%;
+    animation:header-flow 12s ease-in-out infinite;
     backdrop-filter:blur(16px) saturate(160%);
     -webkit-backdrop-filter:blur(16px) saturate(160%);
     border-bottom:1px solid transparent;
     transition:border-color .3s, box-shadow .3s;
   }
-  header.scrolled{border-bottom-color:var(--border);box-shadow:0 8px 30px -20px rgba(17,24,39,.25);}
+  @keyframes header-flow{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  header.scrolled{border-bottom-color:var(--border);box-shadow:0 8px 30px -20px rgba(37,99,235,.25);}
+  header::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:var(--gradient);opacity:.85;
+  }
   .header-inner{display:flex;align-items:center;gap:18px;height:72px;}
   @media(max-width:480px){.header-inner{height:58px;}}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.2rem;white-space:nowrap;flex-shrink:0;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;white-space:nowrap;flex-shrink:0;letter-spacing:-.01em;}
+  .logo{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+  .logo-dot, .logo-img{-webkit-background-clip:initial;background-clip:initial;}
   @media(max-width:480px){
     .logo{font-size:.95rem;gap:6px;}
     .logo-img{width:32px;height:32px;}
   }
-  .logo-dot{width:34px;height:34px;border-radius:10px;background:var(--gradient);position:relative;overflow:hidden;}
+  .logo-dot{width:36px;height:36px;border-radius:11px;background:var(--gradient);position:relative;overflow:hidden;box-shadow:0 6px 16px -6px rgba(37,99,235,.55);}
   .logo-dot::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);
     animation:sheen 4.5s ease-in-out infinite;}
-  .logo-img{width:34px;height:34px;border-radius:10px;object-fit:cover;display:none;}
+  .logo-img{width:36px;height:36px;border-radius:11px;object-fit:cover;display:none;box-shadow:0 6px 16px -6px rgba(37,99,235,.4);}
   @keyframes sheen{0%{transform:translateX(-120%);}45%,100%{transform:translateX(120%);}}
   .trust-pill{
     display:none;
   }
   @media(min-width:780px){
-    .trust-pill{display:flex;align-items:center;gap:6px;margin-left:14px;padding:5px 12px;border-radius:999px;
-      background:rgba(37,99,235,.08);color:var(--primary);font-size:.72rem;font-weight:600;letter-spacing:.02em;}
+    .trust-pill{display:flex;align-items:center;gap:6px;margin-left:14px;padding:6px 14px;border-radius:999px;
+      background:linear-gradient(120deg, rgba(37,99,235,.12), rgba(139,92,246,.12));
+      border:1px solid rgba(37,99,235,.18);
+      color:var(--primary);font-size:.72rem;font-weight:700;letter-spacing:.02em;}
   }
-  .header-icons{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .header-icons{margin-left:auto;display:flex;align-items:center;gap:12px;}
   .icon-btn{
     width:40px;height:40px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    border:1px solid var(--border);transition:all .25s;
-    background:#fff;font-size:.95rem;
+    border:1px solid rgba(255,255,255,.6);transition:all .25s;
+    background:rgba(255,255,255,.9);font-size:.95rem;box-shadow:0 4px 14px -6px rgba(37,99,235,.25);
   }
-  .icon-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px);box-shadow:0 8px 18px -10px rgba(37,99,235,.4);}
+  .icon-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(37,99,235,.45);}
+  @media(max-width:480px){.icon-btn{width:36px;height:36px;}}
 
   /* HERO */
   .hero{
@@ -140,21 +152,42 @@
 
   /* FLASH SALE RIBBON */
   .flash{
-    max-width:1180px;margin:28px auto 0;padding:0 24px;position:relative;z-index:5;
+    max-width:1180px;margin:16px auto 0;padding:0 24px;position:relative;z-index:5;
   }
   .flash-inner{
-    background:var(--gradient);color:#fff;border-radius:24px;
-    padding:22px 28px;display:flex;align-items:center;justify-content:space-between;
-    gap:20px;flex-wrap:wrap;box-shadow:var(--shadow-soft);
+    background:linear-gradient(115deg,#6D28D9,#DB2777 60%,#F472B6 100%);color:#fff;border-radius:16px;
+    padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
+    gap:14px;flex-wrap:wrap;box-shadow:0 14px 30px -16px rgba(109,40,217,.45);
+    position:relative;overflow:hidden;
+    animation:flash-pulse 2.6s ease-in-out infinite;
   }
-  .flash-left{display:flex;align-items:center;gap:14px;}
-  .flash-left .bolt{font-size:1.7rem;}
-  .flash-left h3{font-size:1.15rem;}
-  .flash-left p{font-size:.85rem;color:rgba(255,255,255,.8);margin-top:2px;}
-  .countdown{display:flex;gap:10px;}
-  .unit{background:rgba(255,255,255,.18);border-radius:14px;padding:8px 14px;text-align:center;min-width:58px;}
-  .unit b{display:block;font-family:'JetBrains Mono',monospace;font-size:1.3rem;}
-  .unit span{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.75);}
+  .flash-inner::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);
+    animation:sheen 3.2s ease-in-out infinite;
+  }
+  @keyframes flash-pulse{0%,100%{box-shadow:0 14px 30px -16px rgba(109,40,217,.45);}50%{box-shadow:0 18px 38px -14px rgba(219,39,119,.55);}}
+  .flash-left{display:flex;align-items:center;gap:10px;position:relative;z-index:1;}
+  .flash-left .bolt{font-size:1.35rem;filter:drop-shadow(0 2px 5px rgba(0,0,0,.2));animation:bolt-jiggle 1.8s ease-in-out infinite;}
+  @keyframes bolt-jiggle{0%,85%,100%{transform:rotate(0);}90%{transform:rotate(-12deg);}95%{transform:rotate(10deg);}}
+  .flash-left h3{font-size:.95rem;font-weight:700;letter-spacing:-.005em;}
+  .flash-left p{font-size:.72rem;color:rgba(255,255,255,.85);margin-top:1px;}
+  .countdown{display:flex;gap:7px;position:relative;z-index:1;}
+  .unit{background:rgba(255,255,255,.2);border-radius:10px;padding:5px 10px;text-align:center;min-width:42px;backdrop-filter:blur(4px);}
+  .unit b{display:block;font-family:'JetBrains Mono',monospace;font-size:.95rem;}
+  .unit span{font-size:.52rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.8);}
+  .flash-ticker{
+    width:100%;overflow:hidden;margin-top:10px;position:relative;z-index:1;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  }
+  .flash-ticker-track{display:flex;gap:26px;white-space:nowrap;width:max-content;animation:ticker-scroll 16s linear infinite;}
+  .flash-ticker-item{
+    display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;
+    color:#fff;cursor:pointer;
+  }
+  .flash-ticker-item img{width:24px;height:24px;border-radius:7px;object-fit:cover;border:1px solid rgba(255,255,255,.45);flex-shrink:0;}
+  @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
   /* SECTIONS */
   .section{padding:80px 0;}
@@ -439,11 +472,11 @@
       transform:translateY(100%);
     }
     .qv-overlay.open .qv-modal{transform:translateY(0);}
-    .qv-gallery{height:auto;max-height:34vh;overflow-y:visible;}
-    .qv-main-img{aspect-ratio:4/3;}
+    .qv-gallery{height:auto;overflow-y:visible;}
+    .qv-main-img{aspect-ratio:5/4;}
     .qv-thumbs{padding:8px 12px;}
     .qv-thumbs img{width:44px;height:44px;}
-    .qv-info{height:auto;min-height:0;overflow-y:auto;padding:18px 18px 24px;}
+    .qv-info{height:auto;min-height:0;overflow-y:auto;padding:18px 18px 24px;position:relative;}
     .qv-cat{font-size:.68rem;margin-bottom:4px;}
     .qv-name{font-size:1.08rem;margin-bottom:6px;}
     .qv-stars{font-size:.78rem;margin-bottom:10px;}
@@ -463,6 +496,12 @@
     .qv-spec-list{font-size:.78rem;}
     .qv-spec-list li{padding:6px 0;}
     #qv-order-row{margin:14px -18px -24px;bottom:-24px;padding-left:18px;padding-right:18px;}
+    .qv-info{
+      scrollbar-width:thin;scrollbar-color:#9CA3AF transparent;
+    }
+    .qv-info::-webkit-scrollbar{width:5px;}
+    .qv-info::-webkit-scrollbar-track{background:transparent;}
+    .qv-info::-webkit-scrollbar-thumb{background:#9CA3AF;border-radius:3px;}
   }
 
   /* FLOATING */
@@ -500,8 +539,8 @@
     .container{padding:0 16px;}
     .section-title{font-size:1.45rem;}
     .section-sub{font-size:.85rem;}
-    .flash{margin-top:20px;padding:0 16px;}
-    .flash-inner{padding:16px 18px;flex-direction:column;align-items:flex-start;}
+    .flash{margin-top:14px;padding:0 16px;}
+    .flash-inner{padding:12px 16px;flex-direction:column;align-items:flex-start;border-radius:14px;}
     .countdown{width:100%;justify-content:space-between;}
     .unit{flex:1;min-width:0;padding:8px 6px;}
     .why-grid,.testi-grid{grid-template-columns:1fr;}
@@ -575,7 +614,7 @@
       images:["k801.jpeg","k801.2.jpeg","k801.3.jpeg"],
       tags:["COD"], backup:"Fan: 5-6 hours", features:["Air cooling mode","Light available"],
       colors:[{name:"White",hex:"#F5F5F5"},{name:"Black",hex:"#111827"},{name:"Purple"}] },
-    { name:"Wuji Handheld Turbo Fan", category:"Fan", price:599, oldPrice:650, stock:20, rating:4.8, reviews:10, badge:"Best Seller",
+    { name:"Wuji Handheld Turbo Fan", category:"Fan", price:599, oldPrice:650, stock:20, rating:4.8, reviews:10, badge:"Flash Sale",
       image:"Wuji.jpeg",
       images:["Wuji.jpeg"],
       tags:["COD"], backup:"3-4 hours",
@@ -657,20 +696,31 @@
           <circle cx="17.1" cy="6.9" r="1.15" fill="#fff"/>
         </svg>
       </a>
-      <a class="icon-btn" href="#" id="messenger-header-link" target="_blank" rel="noreferrer" aria-label="Messenger">
-        <svg viewBox="0 0 36 36" width="18" height="18" aria-hidden="true">
-          <defs><linearGradient id="msgr-grad-header" x1="0" y1="36" x2="36" y2="0">
-            <stop offset="0" stop-color="#0096FF"/><stop offset=".5" stop-color="#A033FF"/><stop offset="1" stop-color="#FF5478"/>
-          </linearGradient></defs>
-          <path fill="url(#msgr-grad-header)" d="M18 0C8 0 0 7.4 0 17c0 5.4 2.6 10.2 6.7 13.4V36l6.1-3.3c1.6.4 3.3.7 5.2.7 10 0 18-7.4 18-17S28 0 18 0z"/>
-          <path fill="#fff" d="M8.6 22.7 16.9 14l4.2 4.2 8.3-4.2-9.6 10.4-4.1-4.2-7.1 4.5z"/>
-        </svg>
-      </a>
     </div>
   </div>
 </header>
 
-<section class="section container" id="products" style="padding-top:32px;">
+<div class="flash reveal in">
+  <div class="flash-inner">
+    <div class="flash-left">
+      <span class="bolt">⚡</span>
+      <div>
+        <h3>Today's Flash Sale</h3>
+        <p>Selected items marked down — ends tonight</p>
+      </div>
+    </div>
+    <div class="countdown">
+      <div class="unit"><b id="cd-h">00</b><span>Hours</span></div>
+      <div class="unit"><b id="cd-m">00</b><span>Mins</span></div>
+      <div class="unit"><b id="cd-s">00</b><span>Secs</span></div>
+    </div>
+  </div>
+  <div class="flash-ticker" id="flash-ticker">
+    <div class="flash-ticker-track" id="flash-ticker-track"></div>
+  </div>
+</div>
+
+<section class="section container" id="products" style="padding-top:24px;">
   <div class="section-head reveal in" style="margin-bottom:24px;">
     <div>
       <h2 class="section-title">Our Products</h2>
@@ -686,23 +736,6 @@
   <div class="item"><span class="ic">💵</span> Cash on delivery available</div>
   <div class="item"><span class="ic">🛡️</span> Genuine warranty on every order</div>
   <div class="item"><span class="ic">💬</span> Real replies, no chatbots</div>
-</div>
-
-<div class="flash reveal">
-  <div class="flash-inner">
-    <div class="flash-left">
-      <span class="bolt">⚡</span>
-      <div>
-        <h3>Today's Flash Sale</h3>
-        <p>Selected items marked down — ends tonight</p>
-      </div>
-    </div>
-    <div class="countdown">
-      <div class="unit"><b id="cd-h">00</b><span>Hours</span></div>
-      <div class="unit"><b id="cd-m">00</b><span>Mins</span></div>
-      <div class="unit"><b id="cd-s">00</b><span>Secs</span></div>
-    </div>
-  </div>
 </div>
 
 <section class="hero">
@@ -1080,6 +1113,28 @@ function renderProducts() {
 }
 renderProducts();
 
+/* Flash-sale ticker: auto-lists every product tagged badge:"Flash Sale" */
+(function renderFlashTicker() {
+  const track = document.getElementById("flash-ticker-track");
+  if (!track) return;
+  const flashItems = PRODUCTS.filter(p => p.badge === "Flash Sale");
+  if (!flashItems.length) {
+    document.getElementById("flash-ticker").style.display = "none";
+    return;
+  }
+  const itemHtml = flashItems.map(p =>
+    `<span class="flash-ticker-item" data-name="${p.name}"><img src="${p.image}" alt=""> ${p.name} — now ${CONFIG.currency}${p.price.toLocaleString()}</span>`
+  ).join("");
+  // duplicate the list so the marquee loops seamlessly
+  track.innerHTML = itemHtml + itemHtml;
+  track.querySelectorAll(".flash-ticker-item").forEach(el => {
+    el.addEventListener("click", () => {
+      const match = PRODUCTS.find(p => p.name === el.dataset.name);
+      if (match) openQuickView(match);
+    });
+  });
+})();
+
 /* ---- Product quick-view modal (multi-image gallery) ---- */
 const qvOverlay = document.getElementById("qv-overlay");
 const qvMainImg = document.getElementById("qv-main-img");
@@ -1304,7 +1359,7 @@ const mUrl = `https://m.me/${CONFIG.facebookPageUsername}`;
 const waUrl = whatsappLink(null);
 
 ["fb-page-link", "fb-footer-link"].forEach(id => document.getElementById(id).href = fbUrl);
-["messenger-header-link","messenger-hero-link","messenger-footer-link","messenger-fab","messenger-cta-link","messenger-mobile-link"]
+["messenger-hero-link","messenger-footer-link","messenger-fab","messenger-cta-link","messenger-mobile-link"]
   .forEach(id => document.getElementById(id).href = mUrl);
 ["whatsapp-fab", "whatsapp-hero-link"].forEach(id => document.getElementById(id).href = waUrl);
 
